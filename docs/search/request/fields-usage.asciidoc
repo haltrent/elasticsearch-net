@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -23,6 +23,7 @@ Use <<source-filtering-usage,source filtering>> instead to select subsets of the
 
 See the Elasticsearch documentation on {ref_current}/search-request-stored-fields.html[Fields] for more detail.
 
+[float]
 === Fluent DSL Example
 
 [source,csharp]
@@ -36,6 +37,7 @@ s => s
 )
 ----
 
+[float]
 === Object Initializer Syntax Example
 
 [source,csharp]

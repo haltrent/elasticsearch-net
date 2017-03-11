@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -19,6 +19,7 @@ The low level client allows you to post a `string` or `byte[]` array directly. O
 if you pass a collection of `string` or `object` they will be serialized
 using Elasticsearch's special bulk/multi format.
 
+[float]
 === Implicit Conversion
 
 Even though the argument for PostData on the low level client takes a `PostData<object>`,

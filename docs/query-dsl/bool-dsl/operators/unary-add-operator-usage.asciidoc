@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[unary-add-operator-usage]]
-== Unary Add Operator Usage
+=== Unary Add Operator Usage
 
 [source,csharp]
 ----

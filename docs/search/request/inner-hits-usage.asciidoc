@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[inner-hits-usage]]
-== Inner Hits Usage
+=== Inner Hits Usage
 
 The {ref_current}/mapping-parent-field.html[parent/child] and {ref_current}/nested.html[nested] features allow the
 return of documents that have matches in a different scope.
@@ -30,11 +30,10 @@ Inner hits can be used by defining an `inner_hits` definition on a `nested`, `ha
 
 See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 
-[[query-inner-hits]]
 [float]
-== Query Inner Hits
+=== Query Inner Hits
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -52,7 +51,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -72,7 +71,7 @@ new SearchRequest<King>(Index, typeof(King))
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----

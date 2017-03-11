@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -12,12 +12,13 @@ If you wish to submit a PR for any spelling mistakes, typos or grammatical error
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[connecting]]
-== Connecting
+[[configuration-options]]
+=== Connecting
 
 Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy and there a few options to suit a number of different use cases.
 
 [[connection-strategies]]
+[float]
 === Choosing the right Connection Strategy
 
 If you simply new an `ElasticLowLevelClient`, it will be a non-failover connection to `http://localhost:9200`
@@ -60,6 +61,7 @@ Here instead of directly passing `node`, we pass a <<sniffing-connection-pool, S
 which will use our `node` to find out the rest of the available cluster nodes.
 Be sure to read more about <<connection-pooling, Connection Pooling and Cluster Failover>>.
 
+[float]
 === Configuration Options
 
 Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
@@ -146,6 +148,7 @@ var settings = new ConnectionConfiguration(uri);
 ...but this may become tedious when using connection pooling with multiple nodes.
 
 [[thrown-exceptions]]
+[float]
 === Exceptions
 
 There are three categories of exceptions that may be thrown:
@@ -170,6 +173,7 @@ These are CLR exceptions like `ArgumentException`, `ArgumentOutOfRangeException`
 that are thrown when an API in the client is misused.  The `.ThrowExceptions()` setting has no bearing on these as
 they will always be thrown, and also should not be handled by a consumer.
 
+[float]
 === OnRequestCompleted
 
 You can pass a callback of type `Action<IApiCallDetails>` that can eavesdrop every time a response (good or bad) is created.
@@ -211,6 +215,7 @@ counter.Should().Be(2);
 ----
 
 [[complex-logging]]
+[float]
 === Complex logging with OnRequestCompleted
 
 Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like
@@ -288,6 +293,7 @@ list.ShouldAllBeEquivalentTo(new[]
 <1> Here we use `InMemoryConnection`; in reality you would use another type of `IConnection` that actually makes a request.
 
 [[configuring-ssl]]
+[float]
 === Configuring SSL
 
 SSL can be configured via the `ServerCertificateValidationCallback` property on either `ServerPointManager` or `HttpClientHandler`
@@ -305,6 +311,7 @@ The bare minimum to make .NET accept self-signed SSL certs that are not in the W
 However, this will accept **all** requests from the AppDomain to untrusted SSL sites,
 therefore **we recommend doing some minimal introspection on the passed in certificate.**
 
+[float]
 === Overriding Json.NET settings
 
 Overriding the default Json.NET behaviour in NEST is an expert behavior but if you need to get to the nitty gritty, this can be really useful.

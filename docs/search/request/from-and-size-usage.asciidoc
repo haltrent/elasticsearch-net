@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -25,6 +25,7 @@ defines the offset from the first result you want to fetch.
 
 allows you to configure the maximum amount of hits to be returned.
 
+[float]
 === Object Initializer Syntax Example
 
 [source,csharp]
@@ -45,6 +46,7 @@ new SearchRequest<Project>()
 }
 ----
 
+[float]
 === Fluent DSL Example
 
 [source,csharp]

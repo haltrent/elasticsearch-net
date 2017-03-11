@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -19,6 +19,7 @@ Enables explanation for each hit on how its score was computed.
 
 See the Elasticsearch documentation on {ref_current}/search-explain.html[Explain] for more detail.
 
+[float]
 === Fluent DSL Example
 
 [source,csharp]
@@ -27,6 +28,7 @@ s => s
 .Explain()
 ----
 
+[float]
 === Object Initializer Syntax Example
 
 [source,csharp]

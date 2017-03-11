@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,9 +13,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[sampler-aggregation-usage]]
-== Sampler Aggregation Usage
+=== Sampler Aggregation Usage
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -32,7 +32,7 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -70,7 +70,7 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,11 +13,11 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[verbatim-and-strict-query-usage]]
-== Verbatim And Strict Query Usage
+=== Verbatim And Strict Query Usage
 
 `IsVerbatim` should be set on individual queries to take effect 
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -37,7 +37,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -81,7 +81,7 @@ new TermQuery
 
 Setting `IsVerbatim` on a compound query is still supported though 
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -91,7 +91,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -109,7 +109,7 @@ new BoolQuery
 }
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -121,7 +121,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -145,7 +145,7 @@ new TermQuery
 }
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -164,7 +164,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----

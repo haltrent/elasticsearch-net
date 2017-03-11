@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[connection-pooling]]
-== Connection Pooling
+=== Connection Pooling
 
 Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 NEST can use to issue client calls on. There are four types of connection pool
@@ -27,7 +27,7 @@ NEST can use to issue client calls on. There are four types of connection pool
 * <<sticky-connection-pool,StickyConnectionPool>>
 
 [[single-node-connection-pool]]
-=== SingleNodeConnectionPool
+==== SingleNodeConnectionPool
 
 The simplest of all connection pools, this takes a single `Uri` and uses that to connect to Elasticsearch for all the calls
 It doesn't opt in to sniffing and pinging behavior, and will never mark nodes dead or alive. The one `Uri` it holds is always
@@ -85,7 +85,7 @@ client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionP
 ----
 
 [[static-connection-pool]]
-=== StaticConnectionPool
+==== StaticConnectionPool
 
 The static connection pool is great if you have a known small sized cluster and do no want to enable
 sniffing to find out the cluster topology.
@@ -136,7 +136,7 @@ client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>
 ----
 
 [[sniffing-connection-pool]]
-=== SniffingConnectionPool
+==== SniffingConnectionPool
 
 A subclass of `StaticConnectionPool` that allows itself to be reseeded at run time.
 It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
@@ -190,7 +190,7 @@ client.ConnectionSettings.ConnectionPool.Should().BeOfType<SniffingConnectionPoo
 ----
 
 [[sticky-connection-pool]]
-=== StickyConnectionPool
+==== StickyConnectionPool
 
 A type of `IConnectionPool` that returns the first live node such that it is sticky between
 requests.

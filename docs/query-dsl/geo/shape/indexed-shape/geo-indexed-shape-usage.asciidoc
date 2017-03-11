@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,9 +13,9 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[geo-indexed-shape-usage]]
-== Geo Indexed Shape Usage
+=== Geo Indexed Shape Usage
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -32,7 +32,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----

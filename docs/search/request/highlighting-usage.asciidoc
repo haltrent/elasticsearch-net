@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -20,6 +20,7 @@ The implementation uses either the lucene `highlighter`, `fast-vector-highlighte
 
 See the Elasticsearch documentation on {ref_current}/search-request-highlighting.html[highlighting] for more detail.
 
+[float]
 === Fluent DSL Example
 
 [source,csharp]
@@ -72,6 +73,7 @@ s => s
 )
 ----
 
+[float]
 === Object Initializer Syntax Example
 
 [source,csharp]
@@ -193,6 +195,7 @@ new SearchRequest<Project>
 }
 ----
 
+[float]
 === Handling Responses
 
 [source,csharp]

@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -15,6 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[script-fields-usage]]
 == Script Fields Usage
 
+[float]
 === Fluent DSL Example
 
 [source,csharp]
@@ -35,6 +36,7 @@ s => s
 )
 ----
 
+[float]
 === Object Initializer Syntax Example
 
 [source,csharp]

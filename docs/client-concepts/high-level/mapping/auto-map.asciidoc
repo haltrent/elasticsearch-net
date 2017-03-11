@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[auto-map]]
-== Auto mapping properties
+=== Auto mapping properties
 
 When creating a mapping (either when creating an index or via the put mapping API),
 NEST offers a feature called `.AutoMap()`, which will automagically infer the correct
@@ -46,6 +46,7 @@ public class Employee
 }
 ----
 
+[float]
 === Manual mapping
 
 To create a mapping for our Company type, we can use the fluent API
@@ -128,6 +129,7 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 ----
 
+[float]
 === Simple Automapping
 
 This is exactly where `.AutoMap()` becomes useful. Instead of manually mapping each property,
@@ -313,7 +315,6 @@ respectively. In these cases, it is advisable to use `double` as the POCO proper
 
 ====
 
-[[auto-mapping-with-overrides]]
 [float]
 == Auto mapping with overrides
 
@@ -778,7 +779,6 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 ----
 
-[[ignoring-properties]]
 [float]
 == Ignoring Properties
 
@@ -913,7 +913,6 @@ var settings = WithConnectionSettings(s => s
 settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 ----
 
-[[mapping-recursion]]
 [float]
 == Mapping Recursion
 
@@ -1084,7 +1083,6 @@ var expectedWithMaxRecursion = new
 Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
 ----
 
-[[applying-conventions-through-the-visitor-pattern]]
 [float]
 == Applying conventions through the Visitor pattern
 
@@ -1178,6 +1176,7 @@ var expected = new
 };
 ----
 
+[float]
 === Visiting on PropertyInfo
 
 You can even take the visitor approach a step further, and instead of visiting on `IProperty` types, visit

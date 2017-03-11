@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,13 +13,13 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[document-paths]]
-== Document Paths
+=== Document Paths
 
 Many API's in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes
 and Index, Type and Id separately, we also generate a constructor taking a `DocumentPath` that allows you to describe the path
 to your document more succinctly
 
-=== Creating new instances 
+==== Creating new instances 
 
 here we create a new document path based on Project with the id 1 
 
@@ -54,7 +54,7 @@ Expect("project").WhenSerializing(path.Type);
 Expect(1).WhenSerializing(path.Id);
 ----
 
-=== Creating from a document type instance
+==== Creating from a document type instance
 
 if you have an instance of your document you can use it as well generate document paths
 
@@ -104,7 +104,7 @@ Expect("hello-world").WhenSerializing(path.Id);
 DocumentPath<Project> p = project;
 ----
 
-=== An example with requests 
+==== An example with requests 
 
 [source,csharp]
 ----

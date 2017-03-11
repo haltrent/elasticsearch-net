@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[percolate-query-usage]]
-== Percolate Query Usage
+=== Percolate Query Usage
 
 The percolate query can be used to match queries stored in an index.
 The percolate query itself contains the document that will be used as query to match with the stored queries.
@@ -32,14 +32,14 @@ foreach (var index in values.Values)
 {
     this.Client.CreateIndex(index, c => c
         .Settings(settings=>settings
-            .Analysis(Seeder.ProjectAnalysisSettings)
+            .Analysis(DefaultSeeder.ProjectAnalysisSettings)
         )
         .Mappings(m => m
             .Map<Project>(mm => mm.AutoMap()
-                .Properties(Seeder.ProjectProperties)
+                .Properties(DefaultSeeder.ProjectProperties)
             )
             .Map<PercolatedQuery>(mm => mm.AutoMap()
-                .Properties(Seeder.PercolatedQueryProperties)
+                .Properties(DefaultSeeder.PercolatedQueryProperties)
             )
         )
     );
@@ -58,7 +58,7 @@ foreach (var index in values.Values)
 }
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -66,7 +66,7 @@ f =>
 f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes()
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -103,7 +103,7 @@ new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
 }
 ----
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -115,7 +115,7 @@ q
 )
 ----
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -127,7 +127,7 @@ new PercolateQuery
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----
@@ -139,7 +139,6 @@ match.Id.Should().Be(PercolatorId);
 ((IQueryContainer)match.Query).Match.Should().NotBeNull();
 ----
 
-[[percolate-an-existing-document]]
 [float]
 == Percolate an existing document
 
@@ -160,7 +159,7 @@ The required fields to percolate an existing document are:
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 
-=== Fluent DSL Example
+==== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -175,7 +174,7 @@ q
 ----
 <1> specify the `type`, `index`, `id`, `field`, `document_type` of the document to fetch, to percolate.
 
-=== Object Initializer Syntax Example
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -203,7 +202,7 @@ new PercolateQuery
 }
 ----
 
-=== Handling Responses
+==== Handling Responses
 
 [source,csharp]
 ----

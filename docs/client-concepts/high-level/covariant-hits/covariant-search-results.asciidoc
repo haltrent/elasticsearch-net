@@ -1,4 +1,4 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.0
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/5.2
 
 :github: https://github.com/elastic/elasticsearch-net
 
@@ -52,6 +52,7 @@ public class C : ISearchResult
 }
 ----
 
+[float]
 === Using Types
 
 The most straightforward way to search over multiple types is to
@@ -103,6 +104,7 @@ bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 ----
 
+[float]
 === Using ConcreteTypeSelector
 
 A more low level approach is to inspect the hit yourself and determine the CLR type to deserialize to
@@ -160,6 +162,7 @@ bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 ----
 
+[float]
 === Using CovariantTypes()
 
 The Scroll API is a continuation of the previous Search example so Types() are lost.
