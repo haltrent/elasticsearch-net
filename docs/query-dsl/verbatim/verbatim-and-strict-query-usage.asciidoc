@@ -13,9 +13,13 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[verbatim-and-strict-query-usage]]
-=== Verbatim And Strict Query Usage
+=== Verbatim and Strict Query Usage
 
-`IsVerbatim` should be set on individual queries to take effect 
+[float]
+=== Verbatim Query Usage
+
+An individual query can be marked as verbatim in order take effect; a verbatim query will be serialized and
+sent in the request to Elasticsearch, bypassing NEST's conditionless checks.
 
 ==== Fluent DSL Example
 
@@ -79,7 +83,7 @@ new TermQuery
 }
 ----
 
-Setting `IsVerbatim` on a compound query is still supported though 
+A compound query can also be marked as verbatim, demonstrated here with a `bool` query. 
 
 ==== Fluent DSL Example
 
@@ -215,6 +219,13 @@ new BoolQuery
   }
 }
 ----
+
+[float]
+=== Strict Query Usage
+
+A query can be marked as strict meaning that if it is determined to be conditionless, it will throw an
+exception. The following example demonstrates this by trying to send an empty string as the value for
+a `term` query that is marked as strict
 
 [source,csharp]
 ----
