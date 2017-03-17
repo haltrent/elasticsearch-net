@@ -146,8 +146,6 @@ See the Elasticsearch documentation on {ref_current}/search-aggregations-bucket.
 
 include::aggregations/bucket/adjacency-matrix/adjacency-matrix-usage.asciidoc[]
 
-include::aggregations/bucket/children/children-aggregation-mapping.asciidoc[]
-
 include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]
 
 include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]

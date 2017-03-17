@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[connection-pooling]]
-=== Connection Pooling
+=== Connection pools
 
 Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 NEST can use to issue client calls on. There are four types of connection pool
@@ -42,22 +42,17 @@ var node = pool.Nodes.First();
 node.Uri.Port.Should().Be(9201);
 ----
 
-This type of pool is hardwired to opt out of reseeding (and hence sniffing)
+This type of pool is hardwired to opt out of reseeding (thus, sniffing) as well as pinging 
 
 [source,csharp]
 ----
 pool.SupportsReseeding.Should().BeFalse();
-----
 
-and pinging 
-
-[source,csharp]
-----
 pool.SupportsPinging.Should().BeFalse();
 ----
 
 When you use the low ceremony `ElasticClient` constructor that takes a single `Uri`,
-We default to using `SingleNodeConnectionPool` 
+internally a `SingleNodeConnectionPool` is used 
 
 [source,csharp]
 ----
