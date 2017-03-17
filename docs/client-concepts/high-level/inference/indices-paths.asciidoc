@@ -70,11 +70,11 @@ multipleIndicesFromStringArray.Match(
 );
 singleIndexFromType.Match(
     all => all.Should().BeNull(),
-    many => many.Indices.Should().HaveCount(1).And.Contain("project")
+    many => many.Indices.Should().HaveCount(1).And.Contain(typeof(Project))
 );
 singleIndexFromIndexName.Match(
     all => all.Should().BeNull(),
-    many => many.Indices.Should().HaveCount(1).And.Contain("project")
+    many => many.Indices.Should().HaveCount(1).And.Contain(typeof(Project))
 );
 ----
 <1> `_all` will override any specific index names here
