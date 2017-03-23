@@ -81,10 +81,7 @@ audit = await audit.TraceElasticsearchException(
         e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
     }
 );
-----
 
-[source,csharp]
-----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
     .Ping(r => r.SucceedAlways())
@@ -106,15 +103,6 @@ audit = await audit.TraceElasticsearchException(
     }
 );
 
-e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-
-e.Response.HttpStatusCode.Should().Be(401);
-
-e.Response.ResponseBodyInBytes.Should().BeNull();
-----
-
-[source,csharp]
-----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
     .Ping(r => r.SucceedAlways())
@@ -139,21 +127,6 @@ audit = await audit.TraceElasticsearchException(
     }
 );
 
-e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-
-e.Response.HttpStatusCode.Should().Be(401);
-
-e.Response.ResponseBodyInBytes.Should().NotBeNull();
-
-var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
-
-responseString.Should().Contain("nginx/");
-
-e.DebugInformation.Should().Contain("nginx/");
-----
-
-[source,csharp]
-----
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
     .Ping(r => r.SucceedAlways())
@@ -181,17 +154,5 @@ audit = await audit.TraceElasticsearchException(
         e.DebugInformation.Should().Contain("nginx/");
     }
 );
-
-e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-
-e.Response.HttpStatusCode.Should().Be(401);
-
-e.Response.ResponseBodyInBytes.Should().NotBeNull();
-
-var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
-
-responseString.Should().Contain("nginx/");
-
-e.DebugInformation.Should().Contain("nginx/");
 ----
 

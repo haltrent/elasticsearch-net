@@ -45,33 +45,43 @@ Nest.Indices singleIndexFromString = "name";
 Nest.Indices multipleIndicesFromString = "name1, name2";
 Nest.Indices multipleIndicesFromStringArray = new [] { "name1", "name2" };
 Nest.Indices allFromString = "_all";
+
 Nest.Indices allWithOthersFromString = "_all, name2"; <1>
+
 Nest.Indices singleIndexFromType = typeof(Project); <2>
+
 Nest.Indices singleIndexFromIndexName = IndexName.From<Project>();
+
 singleIndexFromString.Match(
     all => all.Should().BeNull(),
     many => many.Indices.Should().HaveCount(1).And.Contain("name")
 );
+
 multipleIndicesFromString.Match(
     all => all.Should().BeNull(),
     many => many.Indices.Should().HaveCount(2).And.Contain("name2")
 );
+
 allFromString.Match(
     all => all.Should().NotBeNull(),
     many => many.Indices.Should().BeNull()
 );
+
 allWithOthersFromString.Match(
     all => all.Should().NotBeNull(),
     many => many.Indices.Should().BeNull()
 );
+
 multipleIndicesFromStringArray.Match(
     all => all.Should().BeNull(),
     many => many.Indices.Should().HaveCount(2).And.Contain("name2")
 );
+
 singleIndexFromType.Match(
     all => all.Should().BeNull(),
     many => many.Indices.Should().HaveCount(1).And.Contain(typeof(Project))
 );
+
 singleIndexFromIndexName.Match(
     all => all.Should().BeNull(),
     many => many.Indices.Should().HaveCount(1).And.Contain(typeof(Project))
@@ -100,15 +110,12 @@ to simply `Index()`. Be sure to include this static import if copying any of the
 var client = TestClient.Default;
 
 var singleString = Index("name1"); <1>
-
 var singleTyped = Index<Project>(); <2>
 
 ISearchRequest singleStringRequest = new SearchDescriptor<Project>().Index(singleString);
-
 ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(singleTyped);
 
 ((IUrlParameter)singleStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1");
-
 ((IUrlParameter)singleTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project");
 
 var invalidSingleString = Index("name1, name2"); <3>
@@ -126,25 +133,19 @@ Similarly to a single index, multiple indices can be specified using multiple CL
 [source,csharp]
 ----
 var manyStrings = Index("name1", "name2"); <1>
-
 var manyTypes = Index<Project>().And<Developer>(); <2>
-
 var client = TestClient.Default;
 
 ISearchRequest manyStringRequest = new SearchDescriptor<Project>().Index(manyStrings);
-
 ISearchRequest manyTypedRequest = new SearchDescriptor<Project>().Index(manyTypes);
 
 ((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
-
 ((IUrlParameter)manyTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project,devs"); <3>
 
 manyStringRequest = new SearchDescriptor<Project>().Index(new[] { "name1", "name2" });
-
 ((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 
 manyStringRequest = new SearchDescriptor<Project>().Type(new[] { "name1", "name2" });
-
 ((IUrlParameter)manyStringRequest.Type).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
 ----
 <1> specifying multiple indices using strings
@@ -164,15 +165,12 @@ static imports too; in this scenario, the `All` property becomes ambiguous betwe
 [source,csharp]
 ----
 var indicesAll = All;
-
 var allIndices = AllIndices;
 
 ISearchRequest indicesAllRequest = new SearchDescriptor<Project>().Index(indicesAll);
-
 ISearchRequest allIndicesRequest = new SearchDescriptor<Project>().Index(allIndices);
 
 ((IUrlParameter)indicesAllRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("_all");
-
 ((IUrlParameter)allIndicesRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("_all");
 ----
 

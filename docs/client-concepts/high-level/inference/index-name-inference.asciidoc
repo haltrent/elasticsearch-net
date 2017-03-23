@@ -45,11 +45,8 @@ var settings = new ConnectionSettings()
     .MapDefaultTypeIndices(m => m
         .Add(typeof(Project), "projects")
     );
-
 var resolver = new IndexNameResolver(settings);
-
 var index = resolver.Resolve<Project>();
-
 index.Should().Be("projects");
 ----
 
@@ -62,11 +59,8 @@ var settings = new ConnectionSettings()
     .InferMappingFor<Project>(m => m
         .IndexName("projects")
     );
-
 var resolver = new IndexNameResolver(settings);
-
 var index = resolver.Resolve<Project>();
-
 index.Should().Be("projects");
 ----
 
@@ -81,11 +75,8 @@ var settings = new ConnectionSettings()
     .MapDefaultTypeIndices(m => m
         .Add(typeof(Project), "projects")
     );
-
 var resolver = new IndexNameResolver(settings);
-
 var index = resolver.Resolve<Project>();
-
 index.Should().Be("projects");
 ----
 
@@ -97,13 +88,11 @@ on the request
 [source,csharp]
 ----
 Uri requestUri = null;
-
 var client = TestClient.GetInMemoryClient(s=>s.OnRequestCompleted(r => { requestUri = r.Uri; }));
 
 var response = client.Search<Project>(s => s.Index("some-other-index")); <1>
 
 requestUri.Should().NotBeNull();
-
 requestUri.LocalPath.Should().StartWith("/some-other-index/");
 ----
 <1> Provide the index name on the request
@@ -124,7 +113,6 @@ var client = TestClient.GetInMemoryClient(s=>
 var response = client.Search<Project>(s => s.Index("some-other-index")); <1>
 
 response.ApiCall.Uri.Should().NotBeNull();
-
 response.ApiCall.Uri.LocalPath.Should().StartWith("/some-other-index/");
 ----
 <1> Provide the index name on the request

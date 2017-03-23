@@ -26,7 +26,6 @@ here we create a new document path based on Project with the id 1
 [source,csharp]
 ----
 IDocumentPath path = new DocumentPath<Project>(1);
-
 Expect("project").WhenSerializing(path.Index);
 Expect("project").WhenSerializing(path.Type);
 Expect(1).WhenSerializing(path.Id);
@@ -37,8 +36,8 @@ You can still override the inferred index and type name
 [source,csharp]
 ----
 path = new DocumentPath<Project>(1).Type("project1");
-
 Expect("project1").WhenSerializing(path.Type);
+
 path = new DocumentPath<Project>(1).Index("project1");
 Expect("project1").WhenSerializing(path.Index);
 ----
@@ -48,7 +47,6 @@ and there is also a static way to describe such paths
 [source,csharp]
 ----
 path = DocumentPath<Project>.Id(1);
-
 Expect("project").WhenSerializing(path.Index);
 Expect("project").WhenSerializing(path.Type);
 Expect(1).WhenSerializing(path.Id);
@@ -68,11 +66,8 @@ here we create a new document path based on the instance of `Project`, project
 [source,csharp]
 ----
 IDocumentPath path = new DocumentPath<Project>(project);
-
 Expect("project").WhenSerializing(path.Index);
-
 Expect("project").WhenSerializing(path.Type);
-
 Expect("hello-world").WhenSerializing(path.Id);
 ----
 
@@ -81,11 +76,9 @@ You can still override the inferred index and type name
 [source,csharp]
 ----
 path = new DocumentPath<Project>(project).Type("project1");
-
 Expect("project1").WhenSerializing(path.Type);
 
 path = new DocumentPath<Project>(project).Index("project1");
-
 Expect("project1").WhenSerializing(path.Index);
 ----
 
@@ -94,11 +87,8 @@ and again, there is also a static way to describe such paths
 [source,csharp]
 ----
 path = DocumentPath<Project>.Id(project);
-
 Expect("project").WhenSerializing(path.Index);
-
 Expect("project").WhenSerializing(path.Type);
-
 Expect("hello-world").WhenSerializing(path.Id);
 
 DocumentPath<Project> p = project;
@@ -116,7 +106,6 @@ we can see an example of how `DocumentPath` helps your describe your requests mo
 [source,csharp]
 ----
 var request = new IndexRequest<Project>(2) { Document = project };
-
 request = new IndexRequest<Project>(project) { };
 ----
 
@@ -130,6 +119,4 @@ request = new IndexRequest<Project>(IndexName.From<Project>(), TypeName.From<Pro
     Document = project
 };
 ----
-
-Much more verbose, wouldn't you agree?
 

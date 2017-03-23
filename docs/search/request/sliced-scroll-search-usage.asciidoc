@@ -16,6 +16,16 @@ please modify the original csharp file found at the link and submit the PR with 
 == Sliced Scroll Search Usage
 
 [float]
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Scroll("1m")
+.Slice(ss=>ss.Id(0).Max(5))
+----
+
+[float]
 === Object Initializer Syntax Example
 
 [source,csharp]
@@ -36,15 +46,5 @@ new SearchRequest<Project>()
     "max": 5
   }
 }
-----
-
-[float]
-=== Fluent DSL Example
-
-[source,csharp]
-----
-s => s
-.Scroll("1m")
-.Slice(ss=>ss.Id(0).Max(5))
 ----
 

@@ -61,7 +61,6 @@ This type of pool is hardwired to opt out of reseeding (thus, sniffing) as well 
 [source,csharp]
 ----
 pool.SupportsReseeding.Should().BeFalse();
-
 pool.SupportsPinging.Should().BeFalse();
 ----
 
@@ -71,7 +70,6 @@ internally a `SingleNodeConnectionPool` is used
 [source,csharp]
 ----
 var client = new ElasticClient(uri);
-
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 ----
 
@@ -80,7 +78,6 @@ However we urge that you always pass your connection settings explicitly
 [source,csharp]
 ----
 client = new ElasticClient(new ConnectionSettings(uri));
-
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 ----
 
@@ -89,7 +86,6 @@ or even better pass the connection pool explicitly
 [source,csharp]
 ----
 client = new ElasticClient(new ConnectionSettings(pool));
-
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 ----
 
@@ -116,7 +112,6 @@ Or using an enumerable of ``Node``s
 [source,csharp]
 ----
 var nodes = uris.Select(u => new Node(u));
-
 pool = new StaticConnectionPool(nodes);
 ----
 
@@ -140,7 +135,6 @@ the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 [source,csharp]
 ----
 var client = new ElasticClient(new ConnectionSettings(pool));
-
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>();
 ----
 
@@ -170,7 +164,6 @@ and take master only nodes out of rotation for issuing client calls on.
 [source,csharp]
 ----
 var nodes = uris.Select(u=>new Node(u));
-
 pool = new SniffingConnectionPool(nodes);
 ----
 
@@ -194,7 +187,6 @@ the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 [source,csharp]
 ----
 var client = new ElasticClient(new ConnectionSettings(pool));
-
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<SniffingConnectionPool>();
 ----
 
@@ -225,7 +217,6 @@ and take master only nodes out of rotation for issuing client calls on.
 [source,csharp]
 ----
 var nodes = uris.Select(u=>new Node(u));
-
 pool = new StickyConnectionPool(nodes);
 ----
 
@@ -249,7 +240,6 @@ the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 [source,csharp]
 ----
 var client = new ElasticClient(new ConnectionSettings(pool));
-
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<StickyConnectionPool>();
 ----
 

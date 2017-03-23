@@ -27,9 +27,12 @@ Using the constructor directly is possible _but_ can get rather involved when re
 [source,csharp]
 ----
 var fieldString = new Field("name");
+
 var fieldProperty = new Field(typeof(Project).GetProperty(nameof(Project.Name)));
+
 Expression<Func<Project, object>> expression = p => p.Name;
 var fieldExpression = new Field(expression);
+
 Expect("name")
     .WhenSerializing(fieldExpression)
     .WhenSerializing(fieldString)
@@ -47,21 +50,16 @@ IMPORTANT: Boost values are **not** taken into account when determining equality
 [source,csharp]
 ----
 var fieldStringWithBoostTwo = new Field("name^2");
-
 var fieldStringWithBoostThree = new Field("name^3");
 
 Expression<Func<Project, object>> expression = p => p.Name;
-
 var fieldExpression = new Field(expression);
 
 var fieldProperty = new Field(typeof(Project).GetProperty(nameof(Project.Name)));
 
 fieldStringWithBoostTwo.GetHashCode().Should().NotBe(0);
-
 fieldStringWithBoostThree.GetHashCode().Should().NotBe(0);
-
 fieldExpression.GetHashCode().Should().NotBe(0);
-
 fieldProperty.GetHashCode().Should().NotBe(0);
 
 fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); <1>
@@ -78,21 +76,14 @@ value that may also be passed as the second constructor argument
 [source,csharp]
 ----
 Field fieldString = "name^2";
-
 Field fieldStringConstructor = new Field("name^2");
-
 Field fieldStringCreate = new Field("name^2", 3); <1>
 
 fieldString.Name.Should().Be("name");
-
 fieldStringConstructor.Name.Should().Be("name");
-
 fieldStringCreate.Name.Should().Be("name");
-
 fieldString.Boost.Should().Be(2);
-
 fieldStringConstructor.Boost.Should().Be(2);
-
 fieldStringCreate.Boost.Should().Be(2);
 ----
 <1> NEST will take the boost from the name
@@ -110,7 +101,6 @@ Field fieldString = "name";
 Field fieldProperty = typeof(Project).GetProperty(nameof(Project.Name));
 
 Expression<Func<Project, object>> expression = p => p.Name;
-
 Field fieldExpression = expression;
 
 Expect("name")
@@ -157,11 +147,9 @@ You can specify boosts in the field using a string, as well as using `Nest.Infer
 [source,csharp]
 ----
 fieldString = "name^2.1";
-
 fieldString.Boost.Should().Be(2.1);
 
 fieldExpression = Field<Project>(p => p.Name, 2.1);
-
 fieldExpression.Boost.Should().Be(2.1);
 
 Expect("name^2.1")
@@ -197,7 +185,6 @@ to make no changes to the name
 [source,csharp]
 ----
 setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
-
 setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 ----
 
@@ -222,9 +209,7 @@ Similarly, LINQ's `.First()` method also works
 [source,csharp]
 ----
 Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags.First()));
-
 Expect("curatedTags.added").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added));
-
 Expect("curatedTags.name").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name));
 ----
 
@@ -235,7 +220,6 @@ An indexer on a dictionary is assumed to describe a property name
 [source,csharp]
 ----
 Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
-
 Expect("metadata.hardcoded.created").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created));
 ----
 
@@ -244,9 +228,7 @@ A cool feature here is that NEST will evaluate variables passed to an indexer
 [source,csharp]
 ----
 var variable = "var";
-
 Expect("metadata.var").WhenSerializing(Field<Project>(p => p.Metadata[variable]));
-
 Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
 ----
 
@@ -289,7 +271,6 @@ Variables passed to suffix will be evaluated as well
 [source,csharp]
 ----
 var suffix = "unanalyzed";
-
 Expect("metadata.var.unanalyzed").WhenSerializing(
     Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
 
@@ -322,13 +303,9 @@ var fieldExpressions =
     expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw")).ToList();
 
 Expect("name.raw").WhenSerializing(fieldExpressions[0]);
-
 Expect("description.raw").WhenSerializing(fieldExpressions[1]);
-
 Expect("curatedTags.name.raw").WhenSerializing(fieldExpressions[2]);
-
 Expect("leadDeveloper.firstName.raw").WhenSerializing(fieldExpressions[3]);
-
 Expect("metadata.hardcoded.raw").WhenSerializing(fieldExpressions[4]);
 ----
 
@@ -340,13 +317,9 @@ var multiSuffixFieldExpressions =
     expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw").AppendSuffix("evendeeper")).ToList();
 
 Expect("name.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[0]);
-
 Expect("description.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[1]);
-
 Expect("curatedTags.name.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[2]);
-
 Expect("leadDeveloper.firstName.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[3]);
-
 Expect("metadata.hardcoded.raw.evendeeper").WhenSerializing(multiSuffixFieldExpressions[4]);
 ----
 
@@ -361,10 +334,7 @@ public class BuiltIn
     [Text(Name = "naam")]
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 ----
 
@@ -379,10 +349,7 @@ public class SerializerSpecific
     [JsonProperty("nameInJson")]
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
 ----
 
@@ -397,16 +364,12 @@ public class Both
     [JsonProperty("nameInJson")]
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 Expect("naam").WhenSerializing(Field<Both>(p => p.Name));
-
 Expect(new
-{
-    naam = "Martijn Laarman"
-}).WhenSerializing(new Both { Name = "Martijn Laarman" });
+    {
+        naam = "Martijn Laarman"
+    }).WhenSerializing(new Both { Name = "Martijn Laarman" });
 ----
 
 [[field-inference-caching]]
@@ -425,14 +388,10 @@ class C
 {
     public string Name { get; set; }
 }
-----
 
-[source,csharp]
-----
 var client = TestClient.Default;
 
 var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
-
 var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 ----
 
@@ -442,7 +401,6 @@ that will resolve to the same field name, as expected
 [source,csharp]
 ----
 fieldNameOnA.Should().Be("c.name");
-
 fieldNameOnB.Should().Be("c.name");
 ----
 
@@ -457,15 +415,12 @@ var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
         .Rename(p => p.C, "d")
     )
 );
-
 var newClient = new ElasticClient(newConnectionSettings);
 
 fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
-
 fieldNameOnB = newClient.Infer.Field(Field<B>(p => p.C.Name));
 
 fieldNameOnA.Should().Be("d.name");
-
 fieldNameOnB.Should().Be("c.name");
 ----
 
@@ -474,11 +429,9 @@ however we didn't break inference on the first client instance using its separat
 [source,csharp]
 ----
 fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
-
 fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
 fieldNameOnA.Should().Be("c.name");
-
 fieldNameOnB.Should().Be("c.name");
 ----
 
@@ -559,13 +512,9 @@ var usingSettings = WithConnectionSettings(s => s
 ).WithSerializer(s => new CustomSerializer(s));
 
 usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
-
 usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));
-
 usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty));
-
 usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
-
 usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
 ----
 
@@ -588,16 +537,13 @@ usingSettings.Expect(new []
     AskSerializer = "serializer fiddled with this one",
     DefaultFieldNameInferrer = "shouting much?"
 });
-----
 
-[source,csharp]
-----
 public class Parent
-{
-    public int Id { get; set; }
-    public string Description { get; set; }
-    public string IgnoreMe { get; set; }
-}
+        {
+public int Id { get; set; }
+public string Description { get; set; }
+public string IgnoreMe { get; set; }
+        }
 
 public class Child : Parent { }
 ----
@@ -612,7 +558,6 @@ var usingSettings = WithConnectionSettings(s => s
         .Ignore(p => p.IgnoreMe)
     )
 );
-
 usingSettings.Expect(new []
 {
     "id",

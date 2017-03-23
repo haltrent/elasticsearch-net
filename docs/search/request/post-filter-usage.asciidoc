@@ -16,6 +16,15 @@ please modify the original csharp file found at the link and submit the PR with 
 == Post Filter Usage
 
 [float]
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.PostFilter(f => f.MatchAll())
+----
+
+[float]
 === Object Initializer Syntax Example
 
 [source,csharp]
@@ -34,14 +43,5 @@ new SearchRequest<Project>()
     "match_all": {}
   }
 }
-----
-
-[float]
-=== Fluent DSL Example
-
-[source,csharp]
-----
-s => s
-.PostFilter(f => f.MatchAll())
 ----
 

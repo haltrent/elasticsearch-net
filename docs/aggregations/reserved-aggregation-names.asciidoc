@@ -23,3 +23,9 @@ Elasticsearch 5.x will at some point get a flag that returns the aggregations in
 fashion. when this happens, this limitation will be lifted but until that time, avoid the following names for
 aggregation keys:
 
+[source,csharp]
+----
+new []{"score", "value_as_string", "keys", "max_score"}
+new TermsAggregation(name) {Field = "x"}
+----
+

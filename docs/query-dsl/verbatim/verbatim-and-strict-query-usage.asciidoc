@@ -113,6 +113,8 @@ new BoolQuery
 }
 ----
 
+A single verbatim query will be serialized as-is 
+
 ==== Fluent DSL Example
 
 [source,csharp]
@@ -148,6 +150,8 @@ new TermQuery
   }
 }
 ----
+
+Leaf queries within a compound query marked as verbatim will also be serialized as-is
 
 ==== Fluent DSL Example
 
@@ -223,39 +227,7 @@ new BoolQuery
 [float]
 === Strict Query Usage
 
-A query can be marked as strict meaning that if it is determined to be conditionless, it will throw an
+A query can be marked as strict meaning that _if_ it is determined to be _conditionless_, it will throw an
 exception. The following example demonstrates this by trying to send an empty string as the value for
-a `term` query that is marked as strict
-
-[source,csharp]
-----
-var e = Assert.Throws<ArgumentException>(() =>
-    new SearchRequest<Project>
-    {
-        Query = new TermQuery
-        {
-            IsStrict = true,
-            Field = "myfield",
-            Value = ""
-        }
-    }
-);
-
-e.Message.Should().Be("Query is conditionless but strict is turned on");
-----
-
-[source,csharp]
-----
-var e = Assert.Throws<ArgumentException>(() =>
-    new SearchDescriptor<Project>()
-        .Query(q => q
-            .Term(t => t
-                .Strict()
-                .Field("myfield")
-                .Value("")
-            )
-        )
-);
-e.Message.Should().Be("Query is conditionless but strict is turned on");
-----
+a `term` query marked as strict
 

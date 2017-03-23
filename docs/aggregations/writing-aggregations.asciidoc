@@ -152,6 +152,7 @@ var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>,
     a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
     a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 };
+
 return s => s
     .Aggregations(aggs => aggs
         .Children<CommitActivity>("name_of_child_agg", child => child
@@ -165,7 +166,7 @@ return s => s
 
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 
-Combining multipe `AggregationDescriptor`'s is also possible using the bitwise `&&` operator
+Combining multiple ``AggregationDescriptor``'s is also possible using the bitwise `&&` operator
 
 [float]
 === Fluent DSL Example
@@ -173,16 +174,17 @@ Combining multipe `AggregationDescriptor`'s is also possible using the bitwise `
 [source,csharp]
 ----
 var aggregations = new AggregationContainerDescriptor<CommitActivity>()
-    .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-    .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-    && new AggregationContainerDescriptor<CommitActivity>()
-        .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+        .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        && new AggregationContainerDescriptor<CommitActivity>()
+            .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+
 return s => s
-    .Aggregations(aggs => aggs
-        .Children<CommitActivity>("name_of_child_agg", child => child
-            .Aggregations(childAggs => aggregations)
-        )
-    );
+        .Aggregations(aggs => aggs
+            .Children<CommitActivity>("name_of_child_agg", child => child
+                .Aggregations(childAggs => aggregations)
+            )
+        );
 ----
 
 [[aggs-vs-aggregations]]

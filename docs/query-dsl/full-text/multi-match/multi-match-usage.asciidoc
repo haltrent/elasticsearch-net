@@ -93,6 +93,9 @@ new MultiMatchQuery
 }
 ----
 
+[float]
+=== Multi match with boost usage
+
 ==== Fluent DSL Example
 
 [source,csharp]
