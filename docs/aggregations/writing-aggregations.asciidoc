@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[writing-aggregations]]
-== Writing Aggregations
+=== Writing Aggregations
 
 NEST allows you to write your aggregations using
 
@@ -65,6 +65,8 @@ This is the json output for each example
 The fluent lambda syntax is the most terse way to write aggregations.
 It benefits from types that are carried over to sub aggregations
 
+==== Fluent DSL Example
+
 [source,csharp]
 ----
 s => s
@@ -88,6 +90,8 @@ mapping, being dictionary based in C# means it can gow verbose rather quickly.
 
 Here's the same aggregations as expressed in the Fluent API above, with the dictionary-based
 object initializer syntax
+
+==== Object Initializer Syntax Example
 
 [source,csharp]
 ----
@@ -120,6 +124,8 @@ In using these, it is also possible to combine multiple aggregations using the b
 
 Compare the following example with the previous vanilla Object Initializer syntax
 
+==== Object Initializer Syntax Example
+
 [source,csharp]
 ----
 new SearchRequest<Project>
@@ -144,6 +150,8 @@ An advanced scenario may involve an existing collection of aggregation functions
 on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
 `childAggs` below) in turn, returning the descriptor after each function application.
 
+==== Fluent DSL Example
+
 [source,csharp]
 ----
 var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> <1>
@@ -167,9 +175,6 @@ return s => s
 <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 
 Combining multiple ``AggregationDescriptor``'s is also possible using the bitwise `&&` operator
-
-[float]
-=== Fluent DSL Example
 
 [source,csharp]
 ----
@@ -214,6 +219,8 @@ s => s
 
 Now, using `.Aggs`, we can easily get the `Children` aggregation response out and from that,
 the `Average` and `Max` sub aggregations.
+
+==== Handling Responses
 
 [source,csharp]
 ----

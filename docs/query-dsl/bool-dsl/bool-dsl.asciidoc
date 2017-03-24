@@ -13,7 +13,7 @@ please modify the original csharp file found at the link and submit the PR with 
 ////
 
 [[bool-queries]]
-== Bool Queries
+=== Bool queries
 
 Writing boolean queries can grow verbose rather quickly when using the query DSL. For example,
 take a single {ref_current}/query-dsl-bool-query.html[bool query] with only two clauses
@@ -34,12 +34,11 @@ var searchResults = this.Client.Search<Project>(s => s
 
 Now, imagine multiple nested bools; you'll realise that this quickly becomes an exercise in _hadouken indenting_
 
-[[indent]]
 .hadouken indenting
 image::hadouken-indentation.jpg[hadouken indenting]
 
 [float]
-=== Operator Overloading
+=== Operator overloading
 
 For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write.
 The previous example now becomes the following with the fluent API
@@ -120,7 +119,7 @@ Assert(q => +q.Query() && +q.Query(), +Query && +Query, c => c.Bool.Filter.Shoul
 ----
 
 [float]
-=== Combining/Merging bool queries
+=== Combining bool queries
 
 When combining multiple queries some or all possibly marked as `must_not` or `filter`, NEST still combines to a single bool query
 
@@ -262,7 +261,7 @@ always remember that you can mix and match an actual bool query with the bool ds
 
 There is another subtle situation where NEST will not blindly merge 2 bool queries with only should clauses. Consider the following
 
-[source,shell]
+[source,sh]
 ----
 bool(should=term1, term2, term3, term4, minimum_should_match=2) || term5 || term6
 ----
