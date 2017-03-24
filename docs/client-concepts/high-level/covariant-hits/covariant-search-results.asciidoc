@@ -75,7 +75,7 @@ we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearch
 [source,csharp]
 ----
 result.ShouldBeValid();
-result.Documents.Count().Should().Be(100);
+result.Documents.Count.Should().Be(100);
 ----
 
 To prove the returned result set is covariant we filter the documents based on their
@@ -172,7 +172,7 @@ we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearch
 [source,csharp]
 ----
 result.ShouldBeValid();
-result.Documents.Count().Should().Be(100);
+result.Documents.Count.Should().Be(100);
 ----
 
 To prove the returned result set is covariant we filter the documents based on their
@@ -219,7 +219,7 @@ we are expecting. Remember `result.Documents` is an `IReadOnlyCollection<ISearch
 [source,csharp]
 ----
 result.ShouldBeValid();
-result.Documents.Count().Should().Be(100);
+result.Documents.Count.Should().Be(100);
 ----
 
 To prove the returned result set is covariant we filter the documents based on their
