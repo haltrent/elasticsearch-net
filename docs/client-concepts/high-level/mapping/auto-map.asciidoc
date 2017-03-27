@@ -60,7 +60,6 @@ var descriptor = new CreateIndexDescriptor("myindex")
 <2> Auto map employee
 
 [source,javascript]
-.Example json output
 ----
 {
   "mappings": {
@@ -340,7 +339,6 @@ var descriptor = new CreateIndexDescriptor("myindex")
 Thus we do not map properties on the second occurrence of our Child property 
 
 [source,javascript]
-.Example json output
 ----
 {
   "mappings": {
@@ -369,7 +367,6 @@ var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
 `.AutoMap()` has now mapped three levels of our Child property 
 
 [source,javascript]
-.Example json output
 ----
 {
   "mappings": {

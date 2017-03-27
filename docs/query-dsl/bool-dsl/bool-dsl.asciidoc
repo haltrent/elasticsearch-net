@@ -86,7 +86,6 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 Both result in the following JSON query DSL
 
 [source,javascript]
-.Example json output
 ----
 {
   "query": {
@@ -142,7 +141,6 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 Both result in the following JSON query DSL
 
 [source,javascript]
-.Example json output
 ----
 {
   "query": {
@@ -243,7 +241,6 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 Both result in the following JSON query DSL
 
 [source,javascript]
-.Example json output
 ----
 {
   "query": {
@@ -306,7 +303,6 @@ var secondSearchResponse = client.Search<Project>(new SearchRequest<Project>
 Both result in the following JSON query DSL
 
 [source,javascript]
-.Example json output
 ----
 {
   "query": {
